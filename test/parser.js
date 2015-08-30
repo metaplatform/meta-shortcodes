@@ -261,6 +261,21 @@ describe("ShortcodeParser", function(){
 
 		});
 
+		it("should parse shortcode with alternative brackets", function(){
+
+			var parser = ShortcodeParser({
+				openPattern: '\\{{',
+				closePattern: '\\}}'
+			});
+
+			parser.add("test", function(opts, content){
+				return "OK";
+			});
+
+			parser.parse("Some {{test/}} should work.").should.eql("Some OK should work.");
+
+		});
+
 	});
 
 });

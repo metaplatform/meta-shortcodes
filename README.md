@@ -4,7 +4,8 @@ Generic shortcodes parser with support of attributes and single/pair tags.
 
 ## Usage
 ```javascript
-ShortcodeParser = require("meta-shortcodes");
+var should = require("should");
+var ShortcodeParser = require("meta-shortcodes");
 
 var parser = ShortcodeParser();
 
@@ -37,6 +38,15 @@ npm install meta-shortcodes
 ```
 
 ## API
+
+### #constructor(opts)
+
+```
+opts = {
+	openPattern: '\\[',
+	closePattern: '\\]'
+}
+```
 
 ### #add(shortcodeName, handlerFunction)
 
@@ -78,6 +88,23 @@ npm test
 ```
 
 **Current code-coverage 97%**
+
+## Using alternative brackets
+```javascript
+var should = require("should");
+var ShortcodeParser = require("meta-shortcodes");
+
+var parser = ShortcodeParser({
+	openPattern: '\\{{',
+	closePattern: '\\}}'
+});
+
+parser.add("test", function(opts, content){
+	return content.toUpperCase();
+});
+
+var output = parser.parse("Sample {{test}}upper{{/test}} case!").should.eql("Sample UPPER case!");
+```
 
 ## License
 
