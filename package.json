@@ -16,6 +16,14 @@
     "type": "git",
     "url": "https://github.com/metaplatform/meta-shortcodes.git"
   },
+  "keywords": [
+    "shortcode",
+    "shortcodes",
+    "shorttag",
+    "tag",
+    "parser",
+    "shortcode-parser"
+  ],
   "author": "META Platform team <www.meta-platform.com>",
   "license": "MIT",
   "bugs": {
