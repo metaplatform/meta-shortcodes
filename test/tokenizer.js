@@ -84,6 +84,36 @@ describe("Tokenizer", function(){
 
 	});
 
+	describe("#eat", function(){
+
+		it("should return specified number of characters", function(){
+
+			var tokenizer = Tokenizer("hello world!");
+
+			tokenizer.eat(2).should.eql("he");
+
+		});
+
+		it("should move cursor by count of eated characters", function(){
+
+			var tokenizer = Tokenizer("hello world!");
+
+			tokenizer.eat(2);
+			tokenizer.cursor.should.eql(2);
+
+		});
+
+		it("should add eated characters to buffer", function(){
+
+			var tokenizer = Tokenizer("hello world!");
+
+			tokenizer.eat(2);
+			tokenizer.buffer.should.eql("he");
+
+		});
+
+	});
+
 	describe("#match", function(){
 
 		it("should return false when no match and should not skip", function(){

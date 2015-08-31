@@ -79,6 +79,9 @@ Registers new shortcode
 
 #Escaping quotes in arguments
 [name "argu\"ment" "ke\"y"='val\'ue']
+
+#Escaping of entire shortcode
+\\[this shortcode is not processed /]
 ```
 
 ## Testing

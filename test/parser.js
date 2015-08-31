@@ -241,7 +241,7 @@ describe("ShortcodeParser", function(){
 
 			var parser = ShortcodeParser();
 
-			parser.parse("Some [test]with content").should.eql("Some [!test!/]with content");
+			parser.parse("Some [test]with content").should.eql("Some [!test!]with content");
 
 		});
 
@@ -249,7 +249,7 @@ describe("ShortcodeParser", function(){
 
 			var parser = ShortcodeParser();
 
-			parser.parse("Some [test]with content[/test").should.eql("Some [!test!]with content[/!test!]test");
+			parser.parse("Some [test]with content[/test").should.eql("Some [!test!]with content[/test");
 
 		});
 
@@ -257,7 +257,7 @@ describe("ShortcodeParser", function(){
 
 			var parser = ShortcodeParser();
 
-			parser.parse("Some [test]with content[/test2]").should.eql("Some test2[!test!]with content[/!test!]");
+			parser.parse("Some [test]with content[/test2]").should.eql("Some [!test!]with content[/test2]");
 
 		});
 
@@ -284,7 +284,19 @@ describe("ShortcodeParser", function(){
 				return "OK";
 			});
 
-			parser.parse("Some \\[test/] should be ignored.").should.eql("Some [test/] should be ignored.");
+			parser.parse("Some \\[test/] \\[test] [test /] \\[test] \\[test /] [/test] should be ignored.").should.eql("Some [test/] [test] OK [test] [test /] [/test] should be ignored.");
+
+		});
+
+		it("should ignore shortcode with escaped opening pattern nested in regular shortcode", function(){
+
+			var parser = ShortcodeParser();
+
+			parser.add("test", function(opts, content){
+				return content.toUpperCase();
+			});
+
+			parser.parse("Some [test]nested \\[shortcode] or \\[shortcode /] or \\[shortcode]...[/shortcode][/test] should be ignored.").should.eql("Some NESTED [SHORTCODE] OR [SHORTCODE /] OR [SHORTCODE]...[/SHORTCODE] should be ignored.");
 
 		});
 
