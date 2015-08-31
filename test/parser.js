@@ -276,6 +276,18 @@ describe("ShortcodeParser", function(){
 
 		});
 
+		it("should ignore shortcode with escaped opening pattern", function(){
+
+			var parser = ShortcodeParser();
+
+			parser.add("test", function(opts, content){
+				return "OK";
+			});
+
+			parser.parse("Some \\[test/] should be ignored.").should.eql("Some [test/] should be ignored.");
+
+		});
+
 	});
 
 });
